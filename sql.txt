@@ -1,0 +1,40 @@
+CREATE SCHEMA `18022038d` ; 
+
+
+
+CREATE TABLE `user`
+(
+ `username`  varchar(45) NOT NULL ,
+ `firstname` varchar(100) NOT NULL ,
+ `lastname`  varchar(100) NOT NULL ,
+ `password`  blob NOT NULL ,
+ `salt`      blob NOT NULL ,
+
+PRIMARY KEY (`username`)
+);
+
+
+
+
+
+
+CREATE TABLE `notes`
+(
+ `noteid`    int NOT NULL AUTO_INCREMENT ,
+ `title`     varchar(45) NOT NULL ,
+ `content`   varchar(45) NOT NULL ,
+ `encrypted` tinyint NULL ,
+ `username`  varchar(45) NOT NULL ,
+
+PRIMARY KEY (`noteid`),
+KEY `fkIdx_24` (`username`),
+CONSTRAINT `FK_24` FOREIGN KEY `fkIdx_24` (`username`) REFERENCES `user` (`username`)
+);
+
+
+ALTER TABLE `18022038d`.`notes` 
+ADD COLUMN `salt` BLOB NULL AFTER `username`;
+
+
+
+
